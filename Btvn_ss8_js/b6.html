@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>b6</title>
+</head>
+<body>
+    <script>
+        const players = [
+            "Messi - Forward - 25 - 15 - 34",
+            "Ronaldo - Forward - 30 - 10 - 38",
+            "Neymar - Forward - 18 - 20 - 32",
+            "De Bruyne - Midfielder - 8 - 25 - 35",
+            "Kante - Midfielder - 2 - 5 - 36",
+            "Van Dijk - Defender - 5 - 3 - 33",
+            "Alisson - Goalkeeper - 0 - 1 - 37",];
+        function reportByPosition(players) {
+            const minGoals = 5;
+            console.log("BÁO CÁO HIỆU SUẤT THEO VỊ TRÍ\n");
+            const data = players
+                .map(player => {
+                    const parts = player.split(" - ");
+                    return [
+                        parts[0], 
+                        parts[1], 
+                        Number(parts[2]), 
+                        Number(parts[3]),  
+                        Number(parts[4])  
+                    ];
+                }).filter(player => player[2] >= minGoals);
+            const positions = ["Forward", "Midfielder", "Defender"];
+            positions.forEach(position => {
+                const group = data.filter(player => player[1] === position);
+                if (group.length === 0) return;
+                const totalGoals = group.reduce((sum, p) => sum + p[2], 0);
+                const totalAssists = group.reduce((sum, p) => sum + p[3], 0);
+                const totalMatches = group.reduce((sum, p) => sum + p[4], 0);
+                const totalPerformance = group.reduce((sum, p) => sum + (p[2] + p[3]), 0);
+                const avg = (totalPerformance / totalMatches).toFixed(2);
+                console.log(position + ":\n");
+                console.log("- Số cầu thủ: " + group.length);
+                console.log("- Tổng bàn thắng: " + totalGoals);
+                console.log("- Tổng kiến tạo: " + totalAssists);
+                console.log("- Tổng số trận: " + totalMatches);
+                console.log("- Trung bình hiệu suất/trận: " + avg + "\n");
+
+            });
+            const totalTeamGoals = data.reduce((sum, p) => sum + p[2], 0);
+            console.log("------------------------\n");
+            console.log("Tổng bàn thắng toàn đội : " + totalTeamGoals);
+        }
+        reportByPosition(players);
+    </script>
+</body>
+</html>

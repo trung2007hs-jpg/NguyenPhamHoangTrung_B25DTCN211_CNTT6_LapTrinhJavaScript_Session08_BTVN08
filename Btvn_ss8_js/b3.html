@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>b3</title>
+</head>
+
+<body>
+    <script>
+        // ================== BÀI TẬP: FILTER – TÌM CẦU THỦ THEO VỊ TRÍ ==================
+
+        // 1. Khai báo mảng danh sách cầu thủ
+        let players = [
+            "Messi - Forward",
+            "Ronaldo - Forward",
+            "Neymar - Forward",
+            "De Bruyne - Midfielder",
+            "Kante - Midfielder",
+            "Van Dijk - Defender",
+            "Alisson - Goalkeeper"];
+        function filterPlayersByPosition(position, players) {
+            let result = players.filter(function (player) {
+                let parts = player.split(" - ");
+                let playerPosition = parts[1];
+                return playerPosition === position;
+            });
+            return result;
+        }
+        console.log(filterPlayersByPosition("Forward", players));
+    </script>
+</body>
+</html>
